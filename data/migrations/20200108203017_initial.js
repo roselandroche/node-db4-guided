@@ -18,6 +18,8 @@ exports.up = async function(knex) {
             .notNullable()
             .references("id")
             .inTable("species")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE")
     })
 
     await knex.schema.createTable("zoos_animals", (table) => {
@@ -25,10 +27,14 @@ exports.up = async function(knex) {
             .notNullable()
             .references("id")
             .inTable("zoos")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE")
         table.integer("animal_id")
             .notNullable()
             .references("id")
             .inTable("animals")
+            .onDelete("CASCADE")
+            .onUpdate("CASCADE")
         table.date("from")
         table.date("to")
         table.primary(["zoo_id", "animal_id"])
